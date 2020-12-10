@@ -625,10 +625,10 @@ func NewConfigQemuFromApi(vmr *VmRef, client *Client) (config *ConfigQemu, err e
                 config.Ipconfig7 = vmConfig["ipconfig7"].(string)
         }
         if _, isSet := vmConfig["ipconfig8"]; isSet {
-                config.ipconfig8 = vmConfig["ipconfig8"].(string)
+                config.Ipconfig8 = vmConfig["ipconfig8"].(string)
         }
         if _, isSet := vmConfig["ipconfig9"]; isSet {
-                config.ipconfig9 = vmConfig["ipconfig9"].(string)
+                config.Ipconfig9 = vmConfig["ipconfig9"].(string)
         }
 
 	// Add disks.
