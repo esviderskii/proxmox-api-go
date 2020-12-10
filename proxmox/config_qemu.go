@@ -77,10 +77,17 @@ type ConfigQemu struct {
 	Nameserver   string `json:"nameserver"`
 	Sshkeys      string `json:"sshkeys"`
 
-	// arrays are hard, support 3 interfaces for now
+	// arrays are hard, support 10 interfaces for now
 	Ipconfig0 string `json:"ipconfig0"`
 	Ipconfig1 string `json:"ipconfig1"`
 	Ipconfig2 string `json:"ipconfig2"`
+        Ipconfig3 string `json:"ipconfig3"`
+        Ipconfig4 string `json:"ipconfig4"`
+        Ipconfig5 string `json:"ipconfig5"`
+        Ipconfig6 string `json:"ipconfig6"`
+        Ipconfig7 string `json:"ipconfig7"`
+        Ipconfig8 string `json:"ipconfig8"`
+        Ipconfig9 string `json:"ipconfig9"`
 }
 
 // CreateVm - Tell Proxmox API to make the VM
@@ -345,6 +352,35 @@ func (config ConfigQemu) UpdateConfig(vmr *VmRef, client *Client) (err error) {
 		configParams["ipconfig2"] = config.Ipconfig2
 	}
 
+        if config.Ipconfig3 != "" {
+                configParams["ipconfig3"] = config.Ipconfig3
+        }
+
+        if config.Ipconfig4 != "" {
+                configParams["ipconfig4"] = config.Ipconfig4
+        }
+
+        if config.Ipconfig5 != "" {
+                configParams["ipconfig5"] = config.Ipconfig5
+        }
+
+        if config.Ipconfig6 != "" {
+                configParams["ipconfig6"] = config.Ipconfig6
+        }
+
+        if config.Ipconfig7 != "" {
+                configParams["ipconfig7"] = config.Ipconfig7
+        }
+
+        if config.Ipconfig8 != "" {
+                configParams["ipconfig8"] = config.Ipconfig8
+        }
+
+        if config.Ipconfig9 != "" {
+                configParams["ipconfig9"] = config.Ipconfig9
+        }
+
+
 	if len(deleteParams) > 0 {
 		configParams["delete"] = strings.Join(deleteParams, ", ")
 	}
@@ -573,6 +609,27 @@ func NewConfigQemuFromApi(vmr *VmRef, client *Client) (config *ConfigQemu, err e
 	if _, isSet := vmConfig["ipconfig2"]; isSet {
 		config.Ipconfig2 = vmConfig["ipconfig2"].(string)
 	}
+        if _, isSet := vmConfig["ipconfig3"]; isSet {
+                config.Ipconfig3 = vmConfig["ipconfig3"].(string)
+        }
+        if _, isSet := vmConfig["ipconfig4"]; isSet {
+                config.Ipconfig4 = vmConfig["ipconfig4"].(string)
+        }
+        if _, isSet := vmConfig["ipconfig5"]; isSet {
+                config.Ipconfig5 = vmConfig["ipconfig5"].(string)
+        }
+        if _, isSet := vmConfig["ipconfig6"]; isSet {
+                config.Ipconfig6 = vmConfig["ipconfig6"].(string)
+        }
+        if _, isSet := vmConfig["ipconfig7"]; isSet {
+                config.Ipconfig7 = vmConfig["ipconfig7"].(string)
+        }
+        if _, isSet := vmConfig["ipconfig8"]; isSet {
+                config.ipconfig8 = vmConfig["ipconfig8"].(string)
+        }
+        if _, isSet := vmConfig["ipconfig9"]; isSet {
+                config.ipconfig9 = vmConfig["ipconfig9"].(string)
+        }
 
 	// Add disks.
 	diskNames := []string{}
